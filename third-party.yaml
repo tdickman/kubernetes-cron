@@ -1,0 +1,7 @@
+apiVersion: extensions/v1beta1
+kind: ThirdPartyResource
+metadata:
+  name: cron-job.epicconstructions.com
+description: "A specification of a Pod to run on a cron style schedule"
+versions:
+- name: v1alpha1

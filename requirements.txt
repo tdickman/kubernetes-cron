@@ -1,0 +1,3 @@
+kubernetes==1.0.0
+crontab==0.21.3
+gevent
