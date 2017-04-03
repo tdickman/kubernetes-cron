@@ -1,17 +1,22 @@
-This is a project that supports usage of [kubernetes
-cronjobs](https://kubernetes.io/docs/user-guide/cron-jobs/) on clusters without
-alpha support enabled. This is intended as a temporary fix until cronjobs exit
-alpha.
+This is a basic implementation of the Kubernetes CronJob spec. It is intended
+to be used temporarily on clusters where alpha resources cannot be enabled,
+such as GKE until CronJobs exit
+[alpha](https://github.com/kubernetes/kubernetes/issues/41039).
 
 # Usage
 
 1. Create the third party `CronJob` resource on your cluster.
+
     ```kubectl apply -f cron-job-resource.yaml```
+
 2. Run the kubernetes-cron deployment on your cluster.
+
     ```kubectl apply -f deployment.yaml```
+
 3. Create a CronJob object in your cluster based on the
    [spec](https://kubernetes.io/docs/user-guide/cron-jobs/), with one
-exception. Change apiVersion to `epicconstructions.com/v1alpha1`. An example can be found in `example-cron-job.yaml`.
+exception. Change apiVersion to `epicconstructions.com/v1alpha1`. An example
+can be found in `example-cron-job.yaml`.
 
 # Details
 
