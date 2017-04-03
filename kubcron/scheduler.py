@@ -25,7 +25,9 @@ class Scheduler(object):
                     continue
                 schedule = CronTab(cronjob['spec']['schedule'])
                 name = '{name}-{last_trigger}'.format(name=cronjob['metadata']['name'], last_trigger=int(schedule.previous(delta=False)))
-                if not self._job_exists(cronjob['metadata']['namespace'], name):
+                if self._job_exists(cronjob['metadata']['namespace'], name):
+                    logging.info('Skipping execution of {}'.format(name))
+                else:
                     self._trigger_job(cronjob, name)
                     logging.info('Triggering creation of daughter job {}'.format(name))
 

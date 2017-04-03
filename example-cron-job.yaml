@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: pi
 spec:
-  schedule: "* * * * *"
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
