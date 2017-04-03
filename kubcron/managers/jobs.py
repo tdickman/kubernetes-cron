@@ -11,9 +11,13 @@ class JobManager(Manager):
 
     def watch(self):
         """Start listening to the kubernetes api and updating state."""
-        for message in self._watch_http('/apis/batch/v1/jobs'):
-            name = '{}_{}'.format(message['metadata']['namespace'], message['metadata']['name'])
-            self.jobs[name] = message
+        for message in self._watch('/apis/batch/v1/jobs'):
+            obj = message['object']
+            name = '{}_{}'.format(obj['metadata']['namespace'], obj['metadata']['name'])
+            if message['type'] in ['ADDED', 'MODIFIED']:
+                self.jobs[name] = obj
+            elif message['type'] == 'DELETED':
+                self.jobs.pop(name, None)
 
     def create(self, namespace, definition):
         resp = self._post('/apis/extensions/v1beta1/namespaces/{}/jobs'.format(namespace), definition)
