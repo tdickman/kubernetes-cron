@@ -40,7 +40,12 @@ class Scheduler(object):
         metadata['name'] = name
 
         spec = cronjob['spec']['jobTemplate']['spec']
-        spec['template']['metadata'] = {'labels': {'name': metadata['name']}}
+
+        if 'labels' not in spec['template']['metadata']:
+            spec['template']['metadata']['labels'] = {}
+
+        spec['template']['metadata']['labels']['name'] = metadata['name']
+
         # Set a default restartPolicy
         spec['template']['spec']['restartPolicy'] = spec['template']['spec'].get('restartPolicy', 'OnFailure')
         job = {
