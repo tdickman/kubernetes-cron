@@ -49,7 +49,7 @@ class Scheduler(object):
         # Set a default restartPolicy
         spec['template']['spec']['restartPolicy'] = spec['template']['spec'].get('restartPolicy', 'OnFailure')
         job = {
-            'apiVersion': 'extensions/v1beta1',
+            'apiVersion': 'batch/v1',
             'kind': 'Job',
             'metadata': metadata,
             'spec': spec

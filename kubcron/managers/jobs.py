@@ -20,7 +20,7 @@ class JobManager(Manager):
                 self.jobs.pop(name, None)
 
     def create(self, namespace, definition):
-        resp = self._post('/apis/extensions/v1beta1/namespaces/{}/jobs'.format(namespace), definition)
+        resp = self._post('/apis/batch/v1/namespaces/{}/jobs'.format(namespace), definition)
         if resp.status_code != 201:
             logging.error(resp.text)
             raise Exception('Invalid status code {} received when creating job'.format(resp.status_code))
