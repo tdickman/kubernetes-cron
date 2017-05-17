@@ -19,12 +19,12 @@ with open(KUB_API_TOKEN, 'r') as f:
 
 logging.basicConfig(level=logging.INFO)
 cr = cronjobs.CronJobManager(
-    'wss://kubernetes:{}'.format(KUB_API_PORT),
+    'wss://{}:{}'.format(KUB_API_HOST, KUB_API_PORT),
     headers=kub_headers,
     ca_cert=KUB_CA_CERT
 )
 j = jobs.JobManager(
-    'wss://kubernetes:{}'.format(KUB_API_PORT),
+    'wss://{}:{}'.format(KUB_API_HOST, KUB_API_PORT),
     headers=kub_headers,
     ca_cert=KUB_CA_CERT
 )
