@@ -41,6 +41,9 @@ class Scheduler(object):
 
         spec = cronjob['spec']['jobTemplate']['spec']
 
+        if 'metadata' not in spec['template']:
+            spec['template']['metadata'] = {}
+
         if 'labels' not in spec['template']['metadata']:
             spec['template']['metadata']['labels'] = {}
 
