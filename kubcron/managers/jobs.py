@@ -21,7 +21,9 @@ class JobManager(Manager):
 
     def create(self, namespace, definition):
         resp = self._post('/apis/batch/v1/namespaces/{}/jobs'.format(namespace), definition)
-        if resp.status_code != 201:
+        if resp.status_code == 409:
+            logging.info('Job already exists. Skipping.')
+        elif resp.status_code != 201:
             logging.error(resp.text)
             raise Exception('Invalid status code {} received when creating job'.format(resp.status_code))
         return resp.json()
