@@ -7,11 +7,11 @@ such as GKE until CronJobs exit
 
 1. Create the third party `CronJob` resource on your cluster.
 
-    ```kubectl apply -f https://raw.githubusercontent.com/tdickman/kubernetes-cron/0.1.2/cron-job-resource.yaml```
+    ```kubectl apply -f https://raw.githubusercontent.com/tdickman/kubernetes-cron/0.1.3/cron-job-resource.yaml```
 
 2. Run the kubernetes-cron deployment on your cluster (in the default namespace).
 
-    ```kubectl apply -f https://raw.githubusercontent.com/tdickman/kubernetes-cron/0.1.2/deployment.yaml```
+    ```kubectl apply -f https://raw.githubusercontent.com/tdickman/kubernetes-cron/0.1.3/deployment.yaml```
 
 3. Create a CronJob object in your cluster based on the
    [spec](https://kubernetes.io/docs/user-guide/cron-jobs/), with one
