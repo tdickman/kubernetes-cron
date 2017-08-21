@@ -11,7 +11,7 @@ class Manager(object):
         self.ws_headers = [': '.join([key, value]) for key, value in self.headers.items()]
         self.ca_cert = ca_cert
 
-    def _watch(self, endpoint):
+    def k8s_watch(self, endpoint):
         # TODO: Get sslopt working with ssl.CERT_OPTIONAL
         ws = websocket.create_connection(
             '{}{}?watch=true'.format(self.base_url, endpoint),
@@ -20,9 +20,14 @@ class Manager(object):
         for message in ws:
             yield json.loads(message)
 
-    def _post(self, endpoint, data):
-        # TODO: Fix insecure error (due to ssl cert not matching kubernetes hostname)
-        return requests.post(
+    def put(self, endpoint, data):
+        return self._request(endpoint, data, requests.put)
+
+    def post(self, endpoint, data):
+        return self._request(endpoint, data, requests.post)
+
+    def _request(self, endpoint, data, method=requests.post):
+        return method(
             '{}{}'.format(self.base_url.replace('wss:', 'https:'), endpoint),
             json=data,
             headers=self.headers,
