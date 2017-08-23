@@ -11,7 +11,7 @@ class JobManager(Manager):
 
     def watch(self):
         """Start listening to the kubernetes api and updating state."""
-        for message in self._watch('/apis/batch/v1/jobs'):
+        for message in self.k8s_watch('/apis/batch/v1/jobs'):
             obj = message['object']
             name = '{}_{}'.format(obj['metadata']['namespace'], obj['metadata']['name'])
             if message['type'] in ['ADDED', 'MODIFIED']:
@@ -20,7 +20,7 @@ class JobManager(Manager):
                 self.jobs.pop(name, None)
 
     def create(self, namespace, definition):
-        resp = self._post('/apis/batch/v1/namespaces/{}/jobs'.format(namespace), definition)
+        resp = self.post('/apis/batch/v1/namespaces/{}/jobs'.format(namespace), definition)
         if resp.status_code == 409:
             logging.info('Job already exists. Skipping.')
         elif resp.status_code != 201:
