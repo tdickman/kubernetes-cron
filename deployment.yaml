@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: kubernetes-cron
-        image: tdickman/kubernetes-cron:0.1.3
+        image: tdickman/kubernetes-cron:0.1.4
