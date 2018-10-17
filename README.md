@@ -1,3 +1,9 @@
+# Deprecated
+
+[Cron Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) are now supported natively in Kubernetes as a beta feature. Please use this instead of this repository.
+
+---
+
 This is a basic implementation of the Kubernetes CronJob spec. It is intended
 to be used temporarily on clusters where alpha resources cannot be enabled,
 such as GKE until CronJobs exit
